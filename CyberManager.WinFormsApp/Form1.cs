@@ -1,4 +1,4 @@
-using CyberManager.Application.Common.Interfaces.Services;
+using CyberManager.Application.Services;
 
 namespace WinFormsApp
 {
