@@ -1,5 +1,5 @@
-using CyberManager.Application.Common.Interfaces.Services;
-using CyberManager.Application.Services;
+using CyberManager.Application;
+using CyberManager.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -30,7 +30,8 @@ namespace WinFormsApp
             return  Host.CreateDefaultBuilder()
                         .ConfigureServices((context, services) => {
                             //Add service
-                            services.AddScoped<IGreeting, Greeting>();
+                            services.AddApplication();
+                            services.AddInfrastucture();
                             services.AddTransient<Form1>();
                         });
         }
