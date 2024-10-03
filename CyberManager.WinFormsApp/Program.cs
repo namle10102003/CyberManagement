@@ -1,5 +1,7 @@
+using System.Configuration;
 using CyberManager.Application;
 using CyberManager.Infrastructure;
+using CyberManager.Infrastructure.Persistance.Database;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -16,6 +18,10 @@ namespace WinFormsApp
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+
+            DbInitializor.Initialize(connectionString);
 
             var host = CreateHostBuilder().Build();
             ServiceProvider = host.Services;
