@@ -23,7 +23,7 @@ namespace WinFormsApp
 
             DbInitializor.Initialize(connectionString);
 
-            var host = CreateHostBuilder().Build();
+            var host = CreateHostBuilder(connectionString).Build();
             ServiceProvider = host.Services;
 
             Application.Run(ServiceProvider.GetRequiredService<Form1>());
@@ -31,13 +31,13 @@ namespace WinFormsApp
 
         public static IServiceProvider ServiceProvider { get; private set; } = null!;
 
-        public static IHostBuilder CreateHostBuilder()
+        public static IHostBuilder CreateHostBuilder(string connectionString)
         {
             return  Host.CreateDefaultBuilder()
                         .ConfigureServices((context, services) => {
                             //Add service
                             services.AddApplication();
-                            services.AddInfrastucture();
+                            services.AddInfrastucture(connectionString);
                             services.AddTransient<Form1>();
                         });
         }
