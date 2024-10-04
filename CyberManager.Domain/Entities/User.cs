@@ -7,6 +7,8 @@ public class User
     public string Password { get; set;} = null!;
     public int Credit { get; set; } 
 
+    private User() {}
+
     public User(int id, string userName, string password, int credit)
     {
         Id = id;
