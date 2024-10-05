@@ -17,7 +17,7 @@ public class UserRepository : IUserRepository
     public async Task Create(User user)
     {
         string query = @"
-            INSERT INTO users (userName, password, credit)
+            INSERT INTO users (UserName, Password, Credit)
             VALUES (@UserName, @Password, @Credit)
         ";
 

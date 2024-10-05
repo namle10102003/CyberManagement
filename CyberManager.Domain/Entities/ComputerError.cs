@@ -8,7 +8,9 @@ public class ComputerError
     public string Description { get; set; } = null!;
     public bool IsSolve { get; set; }
 
-    public Computer Computer { get; set; }
+    public Computer Computer { get; set; } = null!;
+
+    private ComputerError() {}
 
     public ComputerError(int id, int computerId, Devices device, string description, bool isSolve, Computer computer)
     {

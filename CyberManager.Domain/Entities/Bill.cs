@@ -9,6 +9,8 @@ public class Bill
     public int Cash { get; set; }
     public DateTime DateTime { get; set; }
 
+    private Bill() {}
+
     public Bill(
         int id,
         string title,
