@@ -6,6 +6,8 @@ public class Software
     public string Name { get; set; } = null!;
     public string Path { get; set; } = null!;
 
+    private Software() {}
+
     public Software(
         int id,
         string name,
