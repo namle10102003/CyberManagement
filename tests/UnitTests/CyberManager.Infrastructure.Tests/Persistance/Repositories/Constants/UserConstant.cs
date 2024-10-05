@@ -11,13 +11,13 @@ public class UserConstant
         return new User(0, Guid.NewGuid().ToString(), "TestPassword", 1000);
     }
 
-    public static User RandomCast(User previousUser)
+    public static User UpdateUser(User previousUser)
     {
         Random random = new Random();
         return new User(
             previousUser.Id,
             previousUser.UserName,
-            previousUser.Password,
+            random.Next(10000, 99999).ToString(),
             previousUser.Credit + random.Next(1, 10));
     }
 }
