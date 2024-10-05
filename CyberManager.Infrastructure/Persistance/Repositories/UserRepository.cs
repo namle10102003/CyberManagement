@@ -27,18 +27,35 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task<User> Get(string userName)
+    public async Task<User> GetById(int id)
     {
         string query = @"
-            SELECT * 
+            SELECT *
             FROM users
-            WHERE userName = @UserName
+            WHERE id = @id
         ";
-        var parameter = new { UserName = userName };
 
         using (var connect = _dataAccess.CreateConnection())
         {
-            var result = await connect.QuerySingleAsync<User>(query, parameter);
+            var result = await connect.QuerySingleAsync<User>(query, id);
+            return result;
+        }
+    }
+
+    public async Task<User> Get(string? userName)
+    {
+        var builder = new SqlBuilder();
+        if (userName is not null)
+        {
+            builder.Where("userName = @userName", new { userName });
+        }
+
+        var query = builder.AddTemplate("SELECT * FROM users /**where**/");
+
+
+        using (var connect = _dataAccess.CreateConnection())
+        {
+            var result = await connect.QuerySingleAsync<User>(query.RawSql, query.Parameters);
             return result;
         }
     }

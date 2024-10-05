@@ -5,6 +5,7 @@ namespace CyberManager.Application.Common.Interfaces.Persistences;
 public interface IUserRepository
 {
     Task Create(User user);
-    Task<User> Get(string userName);
+    Task<User> GetById(int id);
+    Task<User> Get(string? userName);
     Task Update(User user);
 }
