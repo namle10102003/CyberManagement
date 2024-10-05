@@ -42,7 +42,7 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task<User> Get(string? userName)
+    public async Task<User> Get(string? userName = null)
     {
         var builder = new SqlBuilder();
         if (userName is not null)
