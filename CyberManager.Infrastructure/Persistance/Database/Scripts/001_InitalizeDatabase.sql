@@ -1,43 +1,43 @@
-CREATE TABLE IF NOT EXISTS "bills" (
-	"id" INTEGER NOT NULL UNIQUE,
-	"title" VARCHAR NOT NULL,
-	"type" VARCHAR NOT NULL CHECK(type IN ('Deposit', 'Withdraw')),
-	"description" TEXT NOT NULL,
-	"cash" INTEGER NOT NULL,
-	"dateTime" DATETIME NOT NULL,
-	PRIMARY KEY("id")
+CREATE TABLE IF NOT EXISTS "Bills" (
+	"Id" INTEGER NOT NULL UNIQUE,
+	"Title" VARCHAR NOT NULL,
+	"Type" VARCHAR NOT NULL CHECK(type IN ('Deposit', 'Withdraw')),
+	"Description" TEXT NOT NULL,
+	"Cash" INTEGER NOT NULL,
+	"DateTime" DATETIME NOT NULL,
+	PRIMARY KEY("Id")
 );
 
-CREATE TABLE IF NOT EXISTS "computers" (
-	"id" INTEGER NOT NULL UNIQUE,
-	"name" VARCHAR NOT NULL,
-	"costPerHour" INTEGER NOT NULL,
-	"status" VARCHAR NOT NULL CHECK(status IN ('Online', 'Offline', 'Error')),
-	PRIMARY KEY("id")
+CREATE TABLE IF NOT EXISTS "Computers" (
+	"Id" INTEGER NOT NULL UNIQUE,
+	"Name" VARCHAR NOT NULL,
+	"CostPerHour" INTEGER NOT NULL,
+	"Status" VARCHAR NOT NULL CHECK(status IN ('Online', 'Offline', 'Error')),
+	PRIMARY KEY("Id")
 );
 
-CREATE TABLE IF NOT EXISTS "computerErrors" (
-	"id" INTEGER NOT NULL UNIQUE,
-	"computerId" INTEGER NOT NULL,
-	"device" VARCHAR NOT NULL CHECK(device IN ('Monitor', 'Keyboard', 'Mouse', 'CPU')),
-	"description" TEXT NOT NULL,
-	"isSolve" BOOLEAN NOT NULL DEFAULT false,
-	PRIMARY KEY("id"),
-	FOREIGN KEY ("computerId") REFERENCES "computers"("id")
+CREATE TABLE IF NOT EXISTS "ComputerErrors" (
+	"Id" INTEGER NOT NULL UNIQUE,
+	"ComputerId" INTEGER NOT NULL,
+	"Device" VARCHAR NOT NULL CHECK(device IN ('Monitor', 'Keyboard', 'Mouse', 'CPU')),
+	"Description" TEXT NOT NULL,
+	"IsSolve" BOOLEAN NOT NULL DEFAULT false,
+	PRIMARY KEY("Id"),
+	FOREIGN KEY ("ComputerId") REFERENCES "Computers"("Id")
 	ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS "softwares" (
-	"id" INTEGER NOT NULL UNIQUE,
-	"name" VARCHAR NOT NULL,
-	"path" TEXT NOT NULL,
-	PRIMARY KEY("id")
+CREATE TABLE IF NOT EXISTS "Softwares" (
+	"Id" INTEGER NOT NULL UNIQUE,
+	"Name" VARCHAR NOT NULL,
+	"Path" TEXT NOT NULL,
+	PRIMARY KEY("Id")
 );
 
-CREATE TABLE IF NOT EXISTS "users" (
-	"id" INTEGER NOT NULL UNIQUE,
-	"userName" VARCHAR NOT NULL,
-	"password" VARCHAR NOT NULL,
-	"credit" INTEGER NOT NULL,
-	PRIMARY KEY("id")
+CREATE TABLE IF NOT EXISTS "Users" (
+	"Id" INTEGER NOT NULL UNIQUE,
+	"UserName" VARCHAR NOT NULL,
+	"Password" VARCHAR NOT NULL,
+	"Credit" INTEGER NOT NULL,
+	PRIMARY KEY("Id")
 );
