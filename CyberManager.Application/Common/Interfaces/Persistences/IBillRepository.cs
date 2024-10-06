@@ -7,9 +7,9 @@ public interface IBillRepository
     Task Create(Bill bill);
     Task<IEnumerable<Bill>> Get(
         BillType? type = null,
-        DateOnly? dateStart = null,
-        DateOnly? dateEnd = null);
+        DateTime? dateStart = null,
+        DateTime? dateEnd = null);
     Task<Bill> GetById(int id);
     Task Update(Bill bill);
-    Task Delete(Bill bill);
+    Task Delete(int id);
 }
