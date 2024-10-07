@@ -38,7 +38,7 @@ public class BillRepository : IBillRepository
 
         using (var connect = _dataAccess.CreateConnection())
         {
-            await connect.ExecuteAsync(sql, id);
+            await connect.ExecuteAsync(sql, new { id });
         }
     }
 
