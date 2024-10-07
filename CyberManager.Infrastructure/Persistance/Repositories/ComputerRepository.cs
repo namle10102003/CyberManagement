@@ -32,7 +32,7 @@ public class ComputerRepository : IComputerRepository
     public async Task Delete(int id)
     {
         string sql = @"
-            DELETE * FROM Computers
+            DELETE FROM Computers
             WHERE Id = @id
         ";
 
