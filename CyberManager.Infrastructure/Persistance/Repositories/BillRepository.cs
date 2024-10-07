@@ -13,7 +13,7 @@ public class BillRepository : IBillRepository
     public BillRepository(IDataAccess dataAccess)
     {
         SqlMapper.AddTypeHandler(new DateTimeHandler());
-        SqlMapper.AddTypeHandler(new BillTypeHandler());
+        SqlMapper.AddTypeHandler(new EnumTypeHandler<BillType>());
         _dataAccess = dataAccess;
     }
 

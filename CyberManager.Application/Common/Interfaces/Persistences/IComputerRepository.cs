@@ -7,8 +7,8 @@ public interface IComputerRepository
     Task Create(Computer computer);
     Task<IEnumerable<Computer>> Get(
         string? name = null,
-        int? coustPerHour = null,
-        bool? isActive = null);
+        int? costPerHour = null,
+        ComputerStatus? status = null);
     Task<Computer> GetById(int id);
     Task Update (Computer computer);
     Task Delete(int id);

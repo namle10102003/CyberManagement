@@ -17,14 +17,15 @@ public class DateTimeHandler : SqliteTypeHandler<DateTime>
         => DateTime.Parse((string)value);
 }
 
-public class BillTypeHandler : SqlMapper.TypeHandler<BillType>
+public class EnumTypeHandler<T> : SqlMapper.TypeHandler<T>
+    where T : struct, Enum
 {
-    public override void SetValue(IDbDataParameter parameter, BillType value)
+    public override void SetValue(IDbDataParameter parameter, T value)
     {
         parameter.DbType = DbType.String;
         parameter.Value = value.ToString();
     } 
 
-    public override BillType Parse(object value)
-        => Enum.Parse<BillType>((string)value);
+    public override T Parse(object value)
+        => Enum.Parse<T>((string)value);
 }
