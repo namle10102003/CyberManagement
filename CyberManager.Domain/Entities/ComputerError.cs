@@ -12,14 +12,18 @@ public class ComputerError
 
     private ComputerError() {}
 
-    public ComputerError(int id, int computerId, Devices device, string description, bool isSolve, Computer computer)
+    public ComputerError(
+        int id,
+        int computerId,
+        Devices device,
+        string description,
+        bool isSolve)
     {
         Id = id;
         ComputerId = computerId;
         Device = device;
         Description = description;
         IsSolve = isSolve;
-        Computer = computer;
     }
 }
 
