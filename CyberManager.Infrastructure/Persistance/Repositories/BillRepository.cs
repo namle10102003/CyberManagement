@@ -86,9 +86,9 @@ public class BillRepository : IBillRepository
         string sql = $@"
             UPDATE Bills
             SET Title = @Title
-                Type = '{bill.Type}'
-                Description = @Description
-                Cash = @Cash
+                Type = '{bill.Type}',
+                Description = @Description,
+                Cash = @Cash,
                 DateTime = @DateTime
             WHERE Id = @Id
         ";
