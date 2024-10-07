@@ -37,7 +37,7 @@ public class UserRepository : IUserRepository
 
         using (var connect = _dataAccess.CreateConnection())
         {
-            var result = await connect.QuerySingleAsync<User>(query, id);
+            var result = await connect.QuerySingleAsync<User>(query, new { id });
             return result;
         }
     }
