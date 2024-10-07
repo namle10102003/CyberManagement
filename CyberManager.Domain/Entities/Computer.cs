@@ -14,15 +14,13 @@ public class Computer
         int id,
         string name,
         int costPerHour,
-        ComputerStatus status,
-        List<ComputerError> errors
+        ComputerStatus status
     )
     {
         Id = id;
         Name = name;
         CostPerHour = costPerHour;
         Status = status;
-        Errors = errors;
     }
 }
 
