@@ -3,6 +3,7 @@ using CyberManager.Domain.Entities;
 using CyberManager.Infrastructure.Persistance.DataAccess;
 using CyberManager.Infrastructure.Persistance.Repositories;
 using CyberManager.Infrastructure.Tests.Persistance.Repositories.Constants;
+using ErrorOr;
 
 namespace CyberManager.Infrastructure.Tests.Persistance.Repositories;
 
@@ -24,7 +25,8 @@ public class UserRepositoryTest
 
         await _userRepository.Create(user);
 
-        var createdUser = await _userRepository.Get(user.UserName);
+        var listUser = await _userRepository.Get(user.UserName);
+        var createdUser = listUser.First();
 
         Assert.NotNull(createdUser);
         Assert.Equal(user.UserName, createdUser.UserName);
@@ -35,7 +37,8 @@ public class UserRepositoryTest
     [Fact]
     public async void Should_Update_User()
     {
-        var testUser = await _userRepository.Get(UserConstant.UpdateUserName);
+        var listUser = await _userRepository.Get(UserConstant.UpdateUserName);
+        var testUser = listUser.First();
 
         Assert.NotNull(testUser);
 
@@ -43,7 +46,8 @@ public class UserRepositoryTest
 
         await _userRepository.Update(updatedUser);
 
-        var result = await _userRepository.Get(UserConstant.UpdateUserName);
+        var listUserAfterUpdate = await _userRepository.Get(UserConstant.UpdateUserName);
+        var result = listUserAfterUpdate.First();
 
         Assert.NotNull(result);
         Assert.NotEqual(testUser.Password, result.Password);
