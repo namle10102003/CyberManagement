@@ -25,8 +25,7 @@ public class UserRepositoryTest
 
         await _userRepository.Create(user);
 
-        var listUser = await _userRepository.Get(user.UserName);
-        var createdUser = listUser.First();
+        var createdUser = await _userRepository.GetByUserName(user.UserName);
 
         Assert.NotNull(createdUser);
         Assert.Equal(user.UserName, createdUser.UserName);
@@ -37,8 +36,7 @@ public class UserRepositoryTest
     [Fact]
     public async void Should_Update_User()
     {
-        var listUser = await _userRepository.Get(UserConstant.UpdateUserName);
-        var testUser = listUser.First();
+        var testUser = await _userRepository.GetByUserName(UserConstant.UpdateUserName);
 
         Assert.NotNull(testUser);
 
@@ -46,8 +44,7 @@ public class UserRepositoryTest
 
         await _userRepository.Update(updatedUser);
 
-        var listUserAfterUpdate = await _userRepository.Get(UserConstant.UpdateUserName);
-        var result = listUserAfterUpdate.First();
+        var result = await _userRepository.GetByUserName(UserConstant.UpdateUserName);
 
         Assert.NotNull(result);
         Assert.NotEqual(testUser.Password, result.Password);

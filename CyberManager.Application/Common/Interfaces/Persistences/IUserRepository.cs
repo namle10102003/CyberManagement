@@ -6,6 +6,7 @@ public interface IUserRepository
 {
     Task Create(User user);
     Task<User> GetById(int id);
-    Task<IEnumerable<User>> Get(string? userName);
+    Task<User> GetByUserName(string userName);
+    Task<IEnumerable<User>> Get();
     Task Update(User user);
 }
