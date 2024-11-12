@@ -39,15 +39,18 @@ public class SoftwareRepository : ISoftwareRepository
         }
     }
 
-    public async Task<IEnumerable<Software>> Get()
+    public async Task<IEnumerable<Software>> Get(string? name = null)
     {
-        string query = @"
-            SELECT * FROM Softwares
-        ";
+        SqlBuilder builder = new SqlBuilder();
+
+        if (name is not null)
+            builder.Where(@"Name = @name", new { name });
+
+        var template = builder.AddTemplate("SELECT * FROM Softwares /**where**/");
 
         using (var connect = _dataAccess.CreateConnection())
         {
-            var result = await connect.QueryAsync<Software>(query);
+            var result = await connect.QueryAsync<Software>(template.RawSql, template.Parameters);
             return result;
         }
     }
