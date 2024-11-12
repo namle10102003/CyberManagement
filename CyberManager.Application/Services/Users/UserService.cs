@@ -9,10 +9,12 @@ namespace CyberManager.Application.Services.Users;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepo;
+    private readonly IBillRepository _billRepo;
 
-    public UserService(IUserRepository userRepo)
+    public UserService(IUserRepository userRepo, IBillRepository billRepo)
     {
         _userRepo = userRepo;
+        _billRepo = billRepo;
     }
 
     public async Task<ErrorOr<UserResult>> ChangePassword(string userName, string newPassword)
@@ -41,6 +43,9 @@ public class UserService : IUserService
 
         user.Credit += cost;
         await _userRepo.Update(user);
+
+        Bill bill =  Bill.CreateDepositBillForUser(userName, cost);
+        await _billRepo.Create(bill);
 
         return new UserResult(user);
     }
