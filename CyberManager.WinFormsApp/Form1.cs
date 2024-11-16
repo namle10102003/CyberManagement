@@ -4,11 +4,9 @@ namespace WinFormsApp
 {
     public partial class Form1 : Form
     {
-        private readonly IGreeting _greeting;
-        public Form1(IGreeting greeting)
+        public Form1()
         {
             InitializeComponent();
-            _greeting = greeting;
         }
 
         private void Form1_Load(object sender, EventArgs e)

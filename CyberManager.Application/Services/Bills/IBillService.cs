@@ -12,6 +12,6 @@ public interface IBillService
         DateTime? dateStart = null,
         DateTime? dateEnd = null);
     Task<ErrorOr<Bill>> GetById(int id);
-    Task<ErrorOr<Bill>> Update(Bill bill);
+    Task<ErrorOr<Updated>> Update(Bill bill);
     Task<ErrorOr<Deleted>> Delete(int id);
 }

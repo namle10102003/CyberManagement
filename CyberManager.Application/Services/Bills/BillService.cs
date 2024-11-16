@@ -57,7 +57,7 @@ public class BillService : IBillService
         return bill;
     }
 
-    public async Task<ErrorOr<Bill>> Update(Bill bill)
+    public async Task<ErrorOr<Updated>> Update(Bill bill)
     {
         var updateBill = await _billRepo.GetById(bill.Id);
 
@@ -65,6 +65,6 @@ public class BillService : IBillService
             return Errors.Common.InstanceIsNotExists;
 
         await _billRepo.Update(bill);
-        return bill;
+        return Result.Updated;
     }
 }
