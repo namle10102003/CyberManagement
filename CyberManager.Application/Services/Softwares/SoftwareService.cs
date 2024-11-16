@@ -14,13 +14,13 @@ public class SoftwareService : ISoftwareService
         _softwareRepo = softwareRepo;
     }
 
-    public async Task<ErrorOr<Software>> Create(Software software)
+    public async Task<ErrorOr<Created>> Create(Software software)
     {
         if (software is null)
             return Errors.Common.NullObject;
 
         await _softwareRepo.Create(software);
-        return software;
+        return Result.Created;
     }
 
     public async Task<ErrorOr<Deleted>> Delete(int id)
@@ -44,7 +44,7 @@ public class SoftwareService : ISoftwareService
         return await _softwareRepo.Get(name);
     }
 
-    public async Task<ErrorOr<Software>> Update(Software software)
+    public async Task<ErrorOr<Updated>> Update(Software software)
     {
         if (software is null)
             return Errors.Common.NullObject;
@@ -54,6 +54,6 @@ public class SoftwareService : ISoftwareService
             return Errors.Common.InstanceIsNotExists;
 
         await _softwareRepo.Update(software);
-        return software;
+        return Result.Updated;
     }
 }

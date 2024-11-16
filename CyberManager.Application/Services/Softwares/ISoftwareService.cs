@@ -5,9 +5,9 @@ namespace CyberManager.Application.Services.Softwares;
 
 public interface ISoftwareService
 {
-    Task<ErrorOr<Software>> Create(Software software); 
+    Task<ErrorOr<Created>> Create(Software software); 
     Task<IEnumerable<Software>> GetAll();
     Task<IEnumerable<Software>> GetByName(string name);
-    Task<ErrorOr<Software>> Update(Software software);
+    Task<ErrorOr<Updated>> Update(Software software);
     Task<ErrorOr<Deleted>> Delete(int id);
 }
