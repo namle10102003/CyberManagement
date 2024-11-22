@@ -1,6 +1,7 @@
 using CyberManager.Api;
 using CyberManager.Application;
 using CyberManager.Infrastructure;
+using CyberManager.Infrastructure.Persistance.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -9,11 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
     if (connectionString is null)
         throw new Exception("The connection string can not be null");
 
+    DbInitializor.Initialize(connectionString);
+
     // Add services to the container.
     builder.Services
-        .AddPresentation()
+        .AddInfrastucture(connectionString)
         .AddApplication()
-        .AddInfrastucture(connectionString);
+        .AddPresentation();
 }
 
 var app = builder.Build();

@@ -1,0 +1,5 @@
+@HOST_ADDRESS = http://localhost:5067
+@id = 3
+
+GET {{HOST_ADDRESS}}/user/{{id}}
+Content-Type: application/json
