@@ -1,0 +1,10 @@
+@HOST_ADDRESS = http://localhost:5067
+@id = 3
+
+PUT {{HOST_ADDRESS}}/user/deposit
+Content-Type: application/json
+
+{
+    "id": {{id}},
+    "cash": 200000
+}

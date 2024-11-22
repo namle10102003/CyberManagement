@@ -1,0 +1,10 @@
+@HOST_ADDRESS = http://localhost:5067
+
+POST {{HOST_ADDRESS}}/user/register
+Content-Type: application/json
+
+{
+    "userName": "Long123",
+    "password": "123456",
+    "credit": 10000
+}
