@@ -7,6 +7,8 @@ public interface IUserService
 {
     Task<ErrorOr<UserResult>> Register(User user);
     Task<ErrorOr<UserResult>> Login(string userName, string password);
-    Task<ErrorOr<UserResult>> ChangePassword(string userName, string newPassword);
-    Task<ErrorOr<UserResult>> DepositCredit(string userName, int cost);
+    Task<UserResult> GetById(int id);
+    Task<ErrorOr<Updated>> ChangePassword(int id, string newPassword);
+    Task<ErrorOr<Updated>> DepositCredit(int id, int cost);
+    Task<ErrorOr<Updated>> UpdateCredit(int id, int credit);
 }
