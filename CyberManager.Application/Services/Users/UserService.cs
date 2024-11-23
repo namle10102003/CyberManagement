@@ -17,44 +17,63 @@ public class UserService : IUserService
         _billRepo = billRepo;
     }
 
-    public async Task<ErrorOr<UserResult>> ChangePassword(string userName, string newPassword)
+    public async Task<ErrorOr<Updated>> ChangePassword(int id, string newPassword)
     {
-        var user = await _userRepo.GetByUserName(userName);
+        var user = await _userRepo.GetById(id);
 
-        if (user == null)
+        if (user is null)
         {
-            return Errors.User.InvalidUserName;
+            return Errors.Common.InstanceIsNotExists;
         }
 
         user.Password = newPassword;
         await _userRepo.Update(user);
 
-        return new UserResult(user);
+        return Result.Updated;
     }
 
-    public async Task<ErrorOr<UserResult>> DepositCredit(string userName, int cost)
+    public async Task<ErrorOr<Updated>> DepositCredit(int id, int cost)
     {
-        var user = await _userRepo.GetByUserName(userName);
+        var user = await _userRepo.GetById(id);
 
-        if (user == null)
+        if (user is null)
         {
-            return Errors.User.InvalidUserName;
+            return Errors.Common.InstanceIsNotExists;
         }
 
         user.Credit += cost;
         await _userRepo.Update(user);
 
-        Bill bill =  Bill.CreateDepositBillForUser(userName, cost);
+        Bill bill =  Bill.CreateDepositBillForUser(user.UserName, cost);
         await _billRepo.Create(bill);
 
+        return Result.Updated;
+    }
+
+    public async Task<UserResult> GetById(int id)
+    {
+        var user = await _userRepo.GetById(id);
         return new UserResult(user);
+    }
+
+    public async Task<ErrorOr<Updated>> UpdateCredit(int id, int credit)
+    {
+        var user = await _userRepo.GetById(id);
+
+        if (user is null)
+            return Errors.Common.InstanceIsNotExists;
+
+        user.Credit = credit;
+        await _userRepo.Update(user);
+
+        return Result.Updated;
     }
 
     public async Task<ErrorOr<UserResult>> Login(string userName, string password)
     {
         var user = await _userRepo.GetByUserName(userName);
 
-        if (user == null)
+        if (user is null)
         {
             return Errors.User.WrongUserNameOrPassword;
         }
@@ -98,4 +117,5 @@ public class UserService : IUserService
 
         return true;
     }
+
 }
